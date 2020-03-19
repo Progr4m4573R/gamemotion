@@ -1,7 +1,9 @@
+print("Imported CardScanner")
 import numpy as np
 
 x = 0
 y = 0
+found = False# becomes true when a card is found
 
 def cardsearch():
     pick = []#Card We are sent by open cv(ONE AT A TIME)
@@ -34,6 +36,7 @@ def cardsearch():
             x = cards[k][1]
             y = cards[k][2]
             print (x,y)
+            found = True
             break
         else:
             cards[k][0]
@@ -41,3 +44,4 @@ def cardsearch():
             k+=1
 
 cardsearch()
+
