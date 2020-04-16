@@ -6,6 +6,8 @@ import time
 import random
 from CardScanner import x ,y # abreviates the name so it is easier to use . can also try "FROM CardScanner import cardsearch,x,y because x and y are global variables"
 
+Robot  = "pepper"
+
 for i in range (1):
     try:
         card_x = x
@@ -16,60 +18,57 @@ for i in range (1):
         card_y = 0 #default pointing position is the middle of the 5 by 5 grid
         print (a)
 
-
-
 for x in range(2):# creates two random variables to get pepper to point at a random location
  random_x =  random.randint(-3,5)#gridwidth max 5
  random_y = random.randint(0,4)#gridheight  max 4
 
 
-if __name__ == "__main__":
-    simulation_manager = SimulationManager()
-    client_id = simulation_manager.launchSimulation(gui=True)
-    #Spawn PEPPER
-    pepper = simulation_manager.spawnPepper(
-        client_id, spawn_ground_plane=True)
+#if __name__ == "__main__":
+simulation_manager = SimulationManager()
+client_id = simulation_manager.launchSimulation(gui=True)
+#Spawn PEPPER
+Robot = simulation_manager.spawnPepper(
+    client_id, spawn_ground_plane=True)
 
-    #Pointing
-    def Point_at_Match():  
-        pepper.setAngles("RShoulderRoll", ((2.2/10)*card_x), 0.1)## rolls shoulder in x direction should, come after movement in y direction 
-        time.sleep(3.0)
-        ## pepper.setAngles("RShoulderRoll", 0.0, 0.1)
-        pepper.setAngles("RShoulderPitch", ((2.2/10)*card_y), 0.1)
-        time.sleep(3.0)
+#Pointing
+def Point_at_Match():  
+    Robot.setAngles("RShoulderRoll", ((2.2/10)*card_x), 0.1)## rolls shoulder in x direction should, come after movement in y direction 
+    time.sleep(3.0)
+    ## pepper.setAngles("RShoulderRoll", 0.0, 0.1)
+    Robot.setAngles("RShoulderPitch", ((2.2/10)*card_y), 0.1)
+    time.sleep(3.0)
 
-    def Random_Point():
-        pepper.setAngles("RShoulderRoll", ((2.2/10)*random_x), 0.1)## rolls shoulder in x direction should, come after movement in y direction 
-        time.sleep(3.0)
-        ## pepper.setAngles("RShoulderRoll", 0.0, 0.1)
-        pepper.setAngles("RShoulderPitch", ((2.2/10)*random_y), 0.1)
-        time.sleep(3.0)
+def Random_Point():
+    Robot.setAngles("RShoulderRoll", ((2.2/10)*random_x), 0.1)## rolls shoulder in x direction should, come after movement in y direction 
+    time.sleep(3.0)
+    ## pepper.setAngles("RShoulderRoll", 0.0, 0.1)
+    Robot.setAngles("RShoulderPitch", ((2.2/10)*random_y), 0.1)
+    time.sleep(3.0)
 
-    def StartUp():
-            #ARMS STRETCHED FRONT
-        pepper.goToPosture("StandZero", 0.6) ##or StandInit // always start with this
-        time.sleep(2.0)
-        
-        ##Getting ready to point stance
-        pepper.setAngles("RShoulderPitch", 0.4, 0.1)## moves in y direction
-        time.sleep(1.0)
-        pepper.setAngles("RElbowYaw", 1.5, 0.1)## Rotates elbow 
-        time.sleep(1.0)
-        ##ReadyPosition
-        pepper.setAngles(["RElbowRoll", "RShoulderPitch"], [1.5, 1.7],  [0.1, 0.1])
-        ## at this point we caucluate the card we need to point at and then its position then begin to point at it.
-        time.sleep(3.0)
+def StartUp():
+    #ARMS STRETCHED FRONT
+    Robot.goToPosture("StandZero", 0.6) ##or StandInit // always start with this
+    time.sleep(2.0)
+    
+    ##Getting ready to point stance
+    Robot.setAngles("RShoulderPitch", 0.4, 0.1)## moves in y direction
+    time.sleep(1.0)
+    Robot.setAngles("RElbowYaw", 1.5, 0.1)## Rotates elbow 
+    time.sleep(1.0)
+    ##ReadyPosition
+    Robot.setAngles(["RElbowRoll", "RShoulderPitch"], [1.5, 1.7],  [0.1, 0.1])
+    ## at this point we caucluate the card we need to point at and then its position then begin to point at it.
+    time.sleep(3.0)
 
-    def Reset():
-        ##Reset
-        pepper.setAngles(["RElbowRoll", "RShoulderPitch"], [0.0, 0.6],  [0.1, 0.1])
-        pepper.setAngles("RElbowYaw", 0.8, 0.1)
-        time.sleep(3.0)
+def Reset():
+    ##Reset
+    Robot.setAngles(["RElbowRoll", "RShoulderPitch"], [0.0, 0.6],  [0.1, 0.1])
+    Robot.setAngles("RElbowYaw", 0.8, 0.1)
+    time.sleep(3.0)
 
 
-    Random_Point()
-    print(random_x, random_y)
-    # code executes instantly if this isn't added
+print(random_x, random_y)
+# code executes instantly if this isn't added
 '''
     pepper.subscribeCamera(PepperVirtual.ID_CAMERA_TOP)
     print("Activating Camera...")##would instantly close if this wasn't added
