@@ -8,15 +8,9 @@ from CardScanner import x ,y # abreviates the name so it is easier to use . can 
 
 Robot  = "pepper"
 
-for i in range (1):
-    try:
-        card_x = x
-        card_y = y
-        break
-    except AttributeError as a:
-        card_x = 0
-        card_y = 0 #default pointing position is the middle of the 5 by 5 grid
-        print (a)
+card_x = x
+card_y = y
+
 
 for x in range(2):# creates two random variables to get pepper to point at a random location
  random_x =  random.randint(-3,5)#gridwidth max 5
@@ -67,27 +61,25 @@ def Reset():
     time.sleep(3.0)
 
 
-print(random_x, random_y)
+print(random_x, random_y)#****uncomment to shows the x and y location Pepper is currently pointing at***
 # code executes instantly if this isn't added
+
 '''
-    pepper.subscribeCamera(PepperVirtual.ID_CAMERA_TOP)
-    print("Activating Camera...")##would instantly close if this wasn't added
+Robot.subscribeCamera(PepperVirtual.ID_CAMERA_TOP)
+print("Activating Camera...")##would instantly close if this wasn't added
+
+
+# Add other objects to the simulation...
+while True:
+    # Retrieving and displaying the synthetic image using OpenCV
+    img = Robot.getCameraFrame()
+    cv2.imshow("synthetic top camera", img)
+    cv2.waitKey(1)
+    False
+    #resolution = Robot.getCameraResolution()#GETS camera resolution
+    # time.sleep(1.0)
+    # print('width : ' +str(resolution.width))
+    # time.sleep(1.0)
+    #print('height : ' +str(resolution.height))
     
-    # Add other objects to the simulation...
-    while True:
-        # Retrieving and displaying the synthetic image using OpenCV
-        img = pepper.getCameraFrame()
-        cv2.imshow("synthetic top camera", img)
-        cv2.waitKey(1)
-
-        resolution = pepper.getCameraResolution()#GETS camera resolution
-       # time.sleep(1.0)
-       # print('width : ' +str(resolution.width))
-       # time.sleep(1.0)
-       #print('height : ' +str(resolution.height))
-    
-        #print(random_x, random_y)#****uncomment to shows the x and y location Pepper is currently pointing at***
-
-       # 
-       '''
-
+'''

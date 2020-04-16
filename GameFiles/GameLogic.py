@@ -4,8 +4,6 @@ import SpawnPepperTestPointing as SP
 from past.builtins.misc import execfile
 
 folder_directory = os.path.dirname(__file__)
-
-
 os.chdir(folder_directory)
 
 #card_found = CS.found#imported GLOBAL Boolean
@@ -16,12 +14,11 @@ player_name = ''
 pepperScore = 0
 playerScore = 0
 
-OpenCvDirectory = './GameFiles'#location of .exe file
+OpenCvDirectory = 'C:/Users/Ghost/OneDrive - University of Lincoln/Year 2 second half/TSE Group Project/Project work/DummyOpenCVCode/Debug/'#location of .exe file
 OpenCvFileName = 'DummyOpenCVCode'#name of your .exe file
-CardScannerDirectory = './GameFiles'
 
 CardScannerName = 'CardScanner.exe'
-RobotMotionDirectory = './GameFiles'
+
 RobotMotionName = 'SpawnPepperTestPointing.py'
 
 #Functions for starting different processes
@@ -34,14 +31,14 @@ def StartOpenCv():#should only be called once
 
 def StartCardScanner():## is only run once each time it is called
     try:
-        os.chdir(CardScannerDirectory)
+        os.chdir(folder_directory)
         os.startfile(CardScannerName)
     except Exception as e:
             print(e)
     
 def StartRobotMotion():#should only be called once
     try:
-        os.chdir(RobotMotionDirectory)
+        os.chdir(folder_directory)
         execfile(RobotMotionName)# the start file command doesn't work for this so had to use execfile
     except Exception as e:
             print(e)
@@ -86,8 +83,9 @@ while True:
                 print("Pepper's score: ",pepperScore)
                 SP.Point_at_Match()#Pepper points at a matching card
                 Pepper_Turn = False
+                Player_Turn = True
                 print("Pointing at match...")
-                break                               
+                                        
 
             elif  CS.cardsearch == "match not found": 
                 print("Pepper is pointing at a random card")
@@ -95,7 +93,7 @@ while True:
                 CS.cardsearch()
                 CS.GameScore()# check the score
                 Pepper_Turn = False
-
+                Player_Turn = True
             #player's turn
         if Player_Turn == True:  
             print("player turn")          
@@ -103,24 +101,21 @@ while True:
                 playerScore += 1 #player score increases 
                 print(player_name,"'s score: ",playerScore)
                 Player_Turn = False
-                break
+                Pepper_Turn = True
             else:
                 print("No match found by player")
                 Player_Turn = False
-                break
+                
 
         #elif to catch the game when its finished
-        elif pepperScore == 6 or playerScore == 6:
-            print("Game over!")
-            break
-
         if pepperScore == 6:
+            print("Game over!")
             print("Pepper wins!")
+            break
         elif playerScore == 6:
+            print("Game over!")
             print(player_name," wins!")
             break
         else:
             print ("logic error, No condition was met")
-            break
-
-#SP.Random_Point()# This doesn't work becaude random point is an embedded method so we need a different way to acces it outside of the code, right now it runs fine within the code
+           #bremoved a break here
