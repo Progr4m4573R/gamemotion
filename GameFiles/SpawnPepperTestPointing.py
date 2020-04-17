@@ -23,10 +23,10 @@ Robot = simulation_manager.spawnPepper(
 
 #Pointing
 def Point_at_Match():  
-    Robot.setAngles("RShoulderRoll", ((2.2/10)*int(cardsearch()[1])), 0.1)## rolls shoulder in x direction should, come after movement in y direction 
+    Robot.setAngles("RShoulderRoll", (-1*(2.2/20)*int(cardsearch()[1])), 0.1)## rolls shoulder in x direction should, come after movement in y direction 
     time.sleep(3.0)
     ## pepper.setAngles("RShoulderRoll", 0.0, 0.1)
-    Robot.setAngles("RShoulderPitch", ((2.2/10)*int(cardsearch()[2])), 0.1)
+    Robot.setAngles("RShoulderPitch", ((2.2/20)*int(cardsearch()[2])), 0.1)
     time.sleep(3.0)
 
 def Random_Point():
