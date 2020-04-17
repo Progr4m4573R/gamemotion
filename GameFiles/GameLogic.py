@@ -14,6 +14,7 @@ player_name = ''
 pepperScore = 0
 playerScore = 0
 
+
 OpenCvDirectory = 'C:/Users/Ghost/OneDrive - University of Lincoln/Year 2 second half/TSE Group Project/Project work/DummyOpenCVCode/Debug/'#location of .exe file
 OpenCvFileName = 'DummyOpenCVCode'#name of your .exe file
 
@@ -67,7 +68,7 @@ while True:
 
         if  Pepper_Turn == True: #if it returns true (card is found in array) 
             #print("Pepper's turn")         
-            if CS.cardsearch() == "match found":           
+            if CS.cardsearch()[0] == "match found":           
                 #code to point to that specific card 
                 pepperScore += 1 #increase peppers score because we know its a match
                 print("Pepper's score: ",pepperScore)
@@ -75,7 +76,7 @@ while True:
                 print("Pointing at match...")
                 Pepper_Turn = False                
 
-            elif  CS.cardsearch == "match not found": 
+            elif  CS.cardsearch()[0] == "match not found": 
                 print("Pepper is pointing at a random card")
                 SP.Random_Point()#point at random card
                 CS.cardsearch()
@@ -85,7 +86,7 @@ while True:
             #player's turn
         if Player_Turn == True:  
             #print("player turn")          
-            if CS.cardsearch()=="match found": #if the players two cards match
+            if CS.cardsearch()[0]=="match found": #if the players two cards match
                 playerScore += 1 #player score increases 
                 print(player_name,"'s score: ",playerScore)
                 Player_Turn = False
@@ -109,6 +110,4 @@ while True:
             print("Game over!")
             print(player_name," wins!")
             break
-        else:
-            print ("logic error, No condition was met")
-           #bremoved a break here
+

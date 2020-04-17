@@ -1,9 +1,8 @@
 print("Imported CardScanner")
 import numpy as np
-x = 0
-y = 0
 
 def cardsearch():
+
     pick = []#Card We are sent by open cv(ONE AT A TIME)
     cards = []#Cards we have seen
 
@@ -32,7 +31,7 @@ def cardsearch():
             print ("card found at location", cards[k][1],cards[k][2])
             x = cards[k][1]
             y = cards[k][2]
-            return "match found"
+            return "match found",x,y
             break
         else:
             print("card not match ")

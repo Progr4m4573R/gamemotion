@@ -4,12 +4,9 @@ from qibullet import SimulationManager
 from qibullet import PepperVirtual
 import time
 import random
-from CardScanner import x ,y # abreviates the name so it is easier to use . can also try "FROM CardScanner import cardsearch,x,y because x and y are global variables"
+from CardScanner import cardsearch # abreviates the name so it is easier to use . can also try "FROM CardScanner import cardsearch,x,y because x and y are global variables"
 
 Robot  = "pepper"
-
-card_x = x
-card_y = y
 
 
 for x in range(2):# creates two random variables to get pepper to point at a random location
@@ -26,10 +23,10 @@ Robot = simulation_manager.spawnPepper(
 
 #Pointing
 def Point_at_Match():  
-    Robot.setAngles("RShoulderRoll", ((2.2/10)*card_x), 0.1)## rolls shoulder in x direction should, come after movement in y direction 
+    Robot.setAngles("RShoulderRoll", ((2.2/10)*int(cardsearch()[1])), 0.1)## rolls shoulder in x direction should, come after movement in y direction 
     time.sleep(3.0)
     ## pepper.setAngles("RShoulderRoll", 0.0, 0.1)
-    Robot.setAngles("RShoulderPitch", ((2.2/10)*card_y), 0.1)
+    Robot.setAngles("RShoulderPitch", ((2.2/10)*int(cardsearch()[2])), 0.1)
     time.sleep(3.0)
 
 def Random_Point():
