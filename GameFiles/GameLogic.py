@@ -17,8 +17,6 @@ playerScore = 0
 OpenCvDirectory = 'C:/Users/Ghost/OneDrive - University of Lincoln/Year 2 second half/TSE Group Project/Project work/DummyOpenCVCode/Debug/'#location of .exe file
 OpenCvFileName = 'DummyOpenCVCode'#name of your .exe file
 
-CardScannerName = 'CardScanner.exe'
-
 RobotMotionName = 'SpawnPepperTestPointing.py'
 
 #Functions for starting different processes
@@ -29,13 +27,6 @@ def StartOpenCv():#should only be called once
     except Exception as e:
             print(e)
 
-def StartCardScanner():## is only run once each time it is called
-    try:
-        os.chdir(folder_directory)
-        os.startfile(CardScannerName)
-    except Exception as e:
-            print(e)
-    
 def StartRobotMotion():#should only be called once
     try:
         os.chdir(folder_directory)
@@ -51,7 +42,6 @@ def MainDirectory():
     print(os.listdir())##shows what files are in the location
 
 StartOpenCv()#Start OpenCv
-StartCardScanner()#Start card scanner code
 StartRobotMotion()#Start pepper simulation
 
 MainDirectory()#changes directory back so we don't get text file not found exception
@@ -76,16 +66,14 @@ while True:
     if pepperScore < 6 and playerScore < 6: #if neither player has won
 
         if  Pepper_Turn == True: #if it returns true (card is found in array) 
-            print("Pepper's turn")         
+            #print("Pepper's turn")         
             if CS.cardsearch() == "match found":           
                 #code to point to that specific card 
                 pepperScore += 1 #increase peppers score because we know its a match
                 print("Pepper's score: ",pepperScore)
                 SP.Point_at_Match()#Pepper points at a matching card
-                Pepper_Turn = False
-                Player_Turn = True
                 print("Pointing at match...")
-                                        
+                Pepper_Turn = False                
 
             elif  CS.cardsearch == "match not found": 
                 print("Pepper is pointing at a random card")
@@ -93,20 +81,25 @@ while True:
                 CS.cardsearch()
                 CS.GameScore()# check the score
                 Pepper_Turn = False
-                Player_Turn = True
+
             #player's turn
         if Player_Turn == True:  
-            print("player turn")          
+            #print("player turn")          
             if CS.cardsearch()=="match found": #if the players two cards match
                 playerScore += 1 #player score increases 
                 print(player_name,"'s score: ",playerScore)
                 Player_Turn = False
-                Pepper_Turn = True
             else:
                 print("No match found by player")
                 Player_Turn = False
-                
-
+        else:
+            first_player = str(input("who's turn?"))
+            if first_player == "1":
+                print("Player's turn")
+                Player_Turn = True
+            elif first_player == "2":
+                print("Pepper's turn")
+                Pepper_Turn = True
         #elif to catch the game when its finished
         if pepperScore == 6:
             print("Game over!")
