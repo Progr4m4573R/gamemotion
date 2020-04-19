@@ -6,14 +6,12 @@ from past.builtins.misc import execfile
 folder_directory = os.path.dirname(__file__)
 os.chdir(folder_directory)
 
-#card_found = CS.found#imported GLOBAL Boolean
 Pepper_Turn = False 
 Player_Turn = False
 player_name = ''
 
 pepperScore = 0
 playerScore = 0
-
 
 OpenCvDirectory = 'C:/Users/Ghost/OneDrive - University of Lincoln/Year 2 second half/TSE Group Project/Project work/DummyOpenCVCode/Debug/'#location of .exe file
 OpenCvFileName = 'DummyOpenCVCode'#name of your .exe file
