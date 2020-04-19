@@ -44,7 +44,7 @@ def MainDirectory():
 
 StartOpenCv()#Start OpenCv
 StartRobotMotion()#Start pepper simulation
-
+SP.StartUp()
 MainDirectory()#changes directory back so we don't get text file not found exception
 
 print("\npress 1 to go first\npress 2 to let pepper go first")
@@ -73,6 +73,7 @@ while True:
                 pepperScore += 1 #increase peppers score because we know its a match
                 print("Pepper's score: ",pepperScore)
                 SP.Point_at_Match()#Pepper points at a matching card
+                
                 print("Pointing at match...")
                 Pepper_Turn = False                
 

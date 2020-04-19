@@ -31,9 +31,29 @@ def cardsearch():
             print ("card found at location", cards[k][1],cards[k][2])
             x = cards[k][1]
             y = cards[k][2]
+
+            pickFile = open('pick.txt', 'w')
+            pickFile.write("")
+            pickFile.close()
+
+            with open('cards.txt','r+') as cardFile:
+                lines = cardFile.readlines()
+                cardFile.seek(0)
+                for line in lines:
+                    if card2 not in line:
+                        cardFile.write(line)
+                cardFile.truncate()
+
+            pick.remove(pick[0])#removes matches
+            cards.remove(cards[k])
+
             return "match found",x,y
             break
         else:
-            print("card not match ")
+            print("No match found")
             k+=1
+    cards.append(pick[0])#adds the card to the array if no match is found
+    for card in cards:
+        print(card)
+
 cardsearch()

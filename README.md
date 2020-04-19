@@ -7,6 +7,9 @@ CardScanner: reads in information from the text file
 
 you will need to use pip install to install any imported modules you may need such as numpy or the q
 
+
+Should you still recieve any errors after installing said moules it may be because you are running the wrong verison of python, try switching to python 3.6.8 and you should be fine
+
 needed modules:
 qibullet
 cv2
