@@ -20,7 +20,6 @@ def cardsearch():
                 pick[j] = [str(n) for n in line.split(',')]
                 j += 1
 
-
         k = 0
         for k in range(len(cards)):
             print (cards[k][0])
@@ -33,11 +32,6 @@ def cardsearch():
                 x = cards[k][1]
                 y = cards[k][2]
 
-
-                pickFile = open('pick.txt', 'w')
-                pickFile.write("")
-                pickFile.close()
-
                 with open('cards.txt','r+') as cardFile:
                     lines = cardFile.readlines()
                     cardFile.seek(0)
@@ -46,12 +40,12 @@ def cardsearch():
                             cardFile.write(line)
                     cardFile.truncate()
 
-                pick.remove(pick[0])#removes matches
-                cards.remove(cards[k])
-
+                with open('pick.txt', 'w') as pickFile:
+                    pickFile.write("")
 
                 return "match found",x,y
-                break
+                pick.remove(pick[0])#removes matches
+                cards.remove(cards[k])
 
             else:
                 print("No match found")
@@ -60,7 +54,16 @@ def cardsearch():
         cards.append(pick[0])#adds the card to the array if no match is found
         for card in cards:
             print(card)
+        
+        with open('cards.txt', 'a') as cardFile:
+            pickedcard = (', '.join(pick[0]))
+            cardFile.write("\n"+pickedcard)
 
+        with open('pick.txt', 'w') as pickFile:
+            pickFile.write("")
+        pick.remove[0]
+        return "match not found"
+        
     except Exception as e:
-        print("No cards in Pick.txt")
-cardsearch()
+        print(e)
+
